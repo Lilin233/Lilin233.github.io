@@ -1,0 +1,849 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2">
+
+<link rel="stylesheet" href="/css/main.css?v=6.7.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.7.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.7.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.7.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.7.0" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '6.7.0',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="数组作为存储对象的有序集合，可能是平时用到的最多的集合类。NS数组中存放的是Fundation对象，简单类型比如int，float等可以封装为NSNumber对象来存放到数组中。Objc中数组分为不可变数组和可变数组，可变数组使用NSMutableArray来处理，不可变数组为NSArray，NSMutableArray是NSArray的子类，也就是说继承了NSArray得所有方法 1.创建一个数">
+<meta name="keywords" content="iOS">
+<meta property="og:type" content="article">
+<meta property="og:title" content="NSArray和NSMutableArray">
+<meta property="og:url" content="http:/2015/08/26/数组/index.html">
+<meta property="og:site_name" content="CocoaThinking">
+<meta property="og:description" content="数组作为存储对象的有序集合，可能是平时用到的最多的集合类。NS数组中存放的是Fundation对象，简单类型比如int，float等可以封装为NSNumber对象来存放到数组中。Objc中数组分为不可变数组和可变数组，可变数组使用NSMutableArray来处理，不可变数组为NSArray，NSMutableArray是NSArray的子类，也就是说继承了NSArray得所有方法 1.创建一个数">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2015-08-26T14:11:25.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="NSArray和NSMutableArray">
+<meta name="twitter:description" content="数组作为存储对象的有序集合，可能是平时用到的最多的集合类。NS数组中存放的是Fundation对象，简单类型比如int，float等可以封装为NSNumber对象来存放到数组中。Objc中数组分为不可变数组和可变数组，可变数组使用NSMutableArray来处理，不可变数组为NSArray，NSMutableArray是NSArray的子类，也就是说继承了NSArray得所有方法 1.创建一个数">
+
+
+
+  <link rel="alternate" href="/atom.xml" title="CocoaThinking" type="application/atom+xml">
+
+
+
+
+  <link rel="canonical" href="http:/2015/08/26/数组/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>NSArray和NSMutableArray | CocoaThinking</title>
+  
+
+
+
+
+  <script async src="//www.googletagmanager.com/gtag/js?id=UA-67553115-1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'UA-67553115-1');
+  </script>
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">CocoaThinking</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <p class="site-subtitle">iOS</p>
+      
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="Toggle navigation bar">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br>Home</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories" rel="section"><i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br>Categories</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/about" rel="section"><i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br>About</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives" rel="section"><i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br>Archives</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/tags" rel="section"><i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br>Tags</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+    
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http:/2015/08/26/数组/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="刘渣渣">
+      <meta itemprop="description" content="好奇 专注 保持进步">
+      <meta itemprop="image" content="/images/youxi.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="CocoaThinking">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">NSArray和NSMutableArray
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2015-08-26 22:09:39 / Modified: 22:11:25" itemprop="dateCreated datePublished" datetime="2015-08-26T22:09:39+08:00">2015-08-26</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>数组作为存储对象的有序集合，可能是平时用到的最多的集合类。NS数组中存放的是Fundation对象，简单类型比如int，float等可以封装为NSNumber对象来存放到数组中。<br>Objc中数组分为不可变数组和可变数组，可变数组使用NSMutableArray来处理，不可变数组为NSArray，NSMutableArray是NSArray的子类，也就是说继承了NSArray得所有方法</p>
+<h3 id="1-创建一个数组"><a href="#1-创建一个数组" class="headerlink" title="1.创建一个数组"></a>1.创建一个数组</h3><p>创建一个NSArray<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">NSArray *array = [NSArray arrayWithObjects:@1, @2, @3, nil];</span><br><span class="line"></span><br><span class="line">NSMutableArray *array1 = [[NSMutableArray alloc]initWithCapacity:10];</span><br><span class="line"></span><br><span class="line">NSMutableArray *array2 = [NSMutableArray array];</span><br><span class="line"></span><br><span class="line">NSMutableArray *array1 = [[NSMutableArray alloc]initWithCapacity:0];</span><br></pre></td></tr></table></figure></p>
+<blockquote>
+<p>使用initWithCapacity方法可以在初始化数组的时候添加一个预留空间，在数组空间超过这个预留空间时候会进行自动追加。不过是再测试中发现这样做并没有提高应有的效率，传言苹果实际上没有采用这个参数。不过这样有个好处是可以做为一个隐性文档来提高代码可读性。<br><a id="more"></a></p>
+</blockquote>
+<p>在创建NSArray数组的时候也可以使用语法糖，相对于调用方法更加简单快捷<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">NSArray *array = @[@&quot;Eve&quot;, @&quot;Adam&quot;, @&quot;Lilith&quot;, @&quot;Lilin&quot;, @&quot;Satan&quot;, @&quot;Lilim&quot;];</span><br></pre></td></tr></table></figure></p>
+<h3 id="2-NSArray-和NSMutableArray-转换"><a href="#2-NSArray-和NSMutableArray-转换" class="headerlink" title="2.NSArray 和NSMutableArray 转换"></a>2.NSArray 和NSMutableArray 转换</h3><p>//NSMutableArray 转换NSArray<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">// 创建可变数组</span><br><span class="line">NSMutableArray *mutableArray = [NSMutableArray array];</span><br><span class="line">// 使用copy方法获得一个NSArray。使用三木运算符判断当NSArray为nil时候重新初始化一个新的对象</span><br><span class="line">// x?:y == x?x:y;  </span><br><span class="line">NSArray *array = [mutableArray copy]?:[NSArray array];</span><br></pre></td></tr></table></figure></p>
+<p>//NSArray 转换NSMutableArray<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">//初始化一个NSArray</span><br><span class="line">NSArray *array = @[@7, @2 ,@0 ,@1, @6, @8, @3] ;</span><br><span class="line">// 使用mutableCopy方法获得一个NSMutableArray</span><br><span class="line">NSMutableArray *mutableArray = [array mutableCopy]?:[NSMutableArray array];</span><br><span class="line">//使用类方法arrayWithArray进行转换</span><br><span class="line">NSMutableArray *mutableArray2 = [NSMutableArray arrayWithArray:array];</span><br></pre></td></tr></table></figure></p>
+<h3 id="3-查找对象"><a href="#3-查找对象" class="headerlink" title="3.查找对象"></a>3.查找对象</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">id object  = [array objectAtIndex:index];</span><br></pre></td></tr></table></figure>
+<p>同样可以通过语法糖获取<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">id object = array[index];</span><br></pre></td></tr></table></figure></p>
+<p>NSArray提供firstObject, lastObject,方法获取数组的首尾对象，当数组为空时候返回nil。而使用常规方法获取空数组中的对象则会返回NSRangeException异常<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">id lastObject  = [array lastObject];</span><br><span class="line">id firstObject = [array firstObject];</span><br></pre></td></tr></table></figure></p>
+<p>为了方便数组中数据量很大的情况下查找数据，苹果已经预先实现二分查找法来遍历数组，这样查询效率将大大提高<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">NSArray *array = @[@&quot;Eve&quot;, @&quot;Adam&quot;, @&quot;Lilith&quot;, @&quot;Lilin&quot;, @&quot;Satan&quot;, @&quot;Lilim&quot;];</span><br><span class="line">NSMutableArray *mutableArray = [NSMutableArray array];</span><br><span class="line">NSRange range = NSMakeRange(0, 5);</span><br><span class="line">NSInteger index = [array indexOfObject:@0 inSortedRange:range options:NSBinarySearchingInsertionIndex usingComparator:^NSComparisonResult(id obj1, id obj2) &#123;</span><br><span class="line">    if (obj1 &lt; obj2) &#123;</span><br><span class="line">        return NSOrderedAscending;</span><br><span class="line">    &#125;</span><br><span class="line">        return NSOrderedDescending;</span><br><span class="line">&#125;];</span><br><span class="line">id object = mutableArray[index];</span><br></pre></td></tr></table></figure></p>
+<h3 id="4-排序"><a href="#4-排序" class="headerlink" title="4.排序"></a>4.排序</h3><p>有很多方法可以对数组进行排序，如果数组中存放的是字符串对象，可以使用sortedArrayUsingSelector:方法进行排序<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">NSArray *array = @[@&quot;Eve&quot;, @&quot;Adam&quot;, @&quot;Lilith&quot;, @&quot;Lilin&quot;];</span><br><span class="line">NSArray *newArray = [array sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)];</span><br></pre></td></tr></table></figure></p>
+<p>如果数组存放的是数字，可以使用compare:方法进行排序<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">NSArray *array = @[@4, @0, @8, @9, @11];</span><br><span class="line">NSArray *newArray = [array sortedArrayUsingSelector:@selector(compare:)];</span><br></pre></td></tr></table></figure></p>
+<p>可是使用reverseObjectEnumerator.allObjects获得一个数组的逆序排列<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">NSArray *array = @[@4, @0, @8, @9, @11];</span><br><span class="line">NSArray *newArray = array.reverseObjectEnumerator.allObjects;</span><br></pre></td></tr></table></figure></p>
+<h3 id="5-枚举"><a href="#5-枚举" class="headerlink" title="5.枚举"></a>5.枚举</h3><p>从一个数组过滤一些元素，组成另一个数组使我们经常遇到的一个场景，同样Objc提供了很多方法可以实现<br>1.快速枚举 NSFastEnumeration(for in)<br>使用快速枚举在数组数据量较大的情况下效率会比传统的for循环提高很多，而且快速枚举代码的可读性也更高<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">NSArray *array = @[@&quot;Eve&quot;, @&quot;Adam&quot;, @&quot;Lilith&quot;, @&quot;Lilin&quot;, @&quot;Satan&quot;, @&quot;Lilim&quot;];</span><br><span class="line">NSMutableArray *newArray = [NSMutableArray array];</span><br><span class="line">for (NSString *godName in array) &#123;</span><br><span class="line">    if ([godName containsString:@&quot;l&quot;]) &#123;                        [newArray addObject:godName];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">NSLog(@&quot;%@&quot;,newArray);</span><br></pre></td></tr></table></figure></p>
+<p>2.使用indexesOfObjectsWithOptions方法<br>当数据量很大的情况下，使用indexesOfObjectsWithOptions方法的NSEnumerationConcurrent参数可以开启同步执行，但这也只是在数据量很大的情况下，当数据量较少时候因为需要额外的线程管理效率会变得更低一些<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">NSArray *array = @[@&quot;Eve&quot;, @&quot;Adam&quot;, @&quot;Lilith&quot;, @&quot;Lilin&quot;, @&quot;Satan&quot;, @&quot;Lilim&quot;];</span><br><span class="line">NSIndexSet *indexSet = [array indexesOfObjectsWithOptions:NSEnumerationConcurrent passingTest:^BOOL(id obj, NSUInteger idx, BOOL *stop) &#123;</span><br><span class="line">    if ([obj isKindOfClass:[NSString class]]) &#123;</span><br><span class="line">        NSString *godName = obj;</span><br><span class="line">        if ([godName containsString:@&quot;l&quot;]) &#123;</span><br><span class="line">                    return obj;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">            return nil;</span><br><span class="line">    &#125;];</span><br><span class="line">NSArray *newArray = [array objectsAtIndexes:indexSet];</span><br><span class="line">NSLog(@&quot;%@&quot;,newArray);</span><br></pre></td></tr></table></figure></p>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2015/08/12/iOS常用设计模式/" rel="next" title="iOS常用设计模式">
+                <i class="fa fa-chevron-left"></i> iOS常用设计模式
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2015/09/25/NSUserActivity/" rel="prev" title="iOS9 Search API NSUserActivity">
+                iOS9 Search API NSUserActivity <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/youxi.jpg" alt="刘渣渣">
+            
+              <p class="site-author-name" itemprop="name">刘渣渣</p>
+              <p class="site-description motion-element" itemprop="description">好奇 专注 保持进步</p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives">
+                
+                    <span class="site-state-item-count">3</span>
+                    <span class="site-state-item-name">posts</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                    <span class="site-state-item-count">1</span>
+                    <span class="site-state-item-name">categories</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">3</span>
+                    <span class="site-state-item-name">tags</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                友情链接
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://dulingkang.github.io" title="http://dulingkang.github.io" rel="noopener" target="_blank">shawnDu</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="/www.wendao.info" title="www.wendao.info">张省三</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-创建一个数组"><span class="nav-number">1.</span> <span class="nav-text">1.创建一个数组</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-NSArray-和NSMutableArray-转换"><span class="nav-number">2.</span> <span class="nav-text">2.NSArray 和NSMutableArray 转换</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-查找对象"><span class="nav-number">3.</span> <span class="nav-text">3.查找对象</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-排序"><span class="nav-number">4.</span> <span class="nav-text">4.排序</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-枚举"><span class="nav-number">5.</span> <span class="nav-text">5.枚举</span></a></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">刘渣渣</span>
+
+  
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> v3.8.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> v6.7.0</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script src="/js/src/utils.js?v=6.7.0"></script>
+
+  <script src="/js/src/motion.js?v=6.7.0"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/src/schemes/muse.js?v=6.7.0"></script>
+
+
+
+  
+  <script src="/js/src/scrollspy.js?v=6.7.0"></script>
+<script src="/js/src/post-details.js?v=6.7.0"></script>
+
+
+
+  
+
+
+  <script src="/js/src/bootstrap.js?v=6.7.0"></script>
+
+
+
+  
+
+
+  
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
