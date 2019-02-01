@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://www.cocoathinking.com/"/>
-  <updated>2015-09-25T03:49:18.000Z</updated>
+  <updated>2019-02-01T08:42:28.429Z</updated>
   <id>https://www.cocoathinking.com/</id>
   
   <author>
@@ -15,6 +15,27 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>cocoaThinking重启计划</title>
+    <link href="https://www.cocoathinking.com/2019/02/01/%E5%8D%9A%E5%AE%A2%E9%87%8D%E5%90%AF/"/>
+    <id>https://www.cocoathinking.com/2019/02/01/博客重启/</id>
+    <published>2019-02-01T08:37:17.000Z</published>
+    <updated>2019-02-01T08:42:28.429Z</updated>
+    
+    <content type="html"><![CDATA[<p>我在2015年开通了自己的博客，博客通过hexo+github搭建，博客开通的虽早，但是写作确没有怎么坚持下来，2015年到现在零零散散的写了不到10篇，多数还是在15年趁着刚刚搭建完的热乎劲写成，实在汗颜。2019阴历新年马上就要到了，我决定制定一个cocoaThinking重启计划，一方面写一写技术总结，另一方面也有地方可以写一下日常的生活点滴。<br>这次博客的重启，我更新了一些必要工具，hexo，node，npm，还有hexo的模板Next，更新的时候我发现node的版本从当时的0.10升级到了11.15，hexo和next也都完成多个版本的升级，不得不感慨时光匆匆，几年的时间过的真快，当时搭建博客的时候和我的同事showndu一起研究讨论问题的场景还是历历在目，这也更坚定了我对这次重启计划的决心。<br>看了一下自己以前写的文章，多数因为年代久远已经过时了，剩下的几篇比如《iOS常用设计模式》，因为当时的自己较为年轻，写的文章也有很多不足。所以会对之前的文章进行清理，过时的删掉，不足的会进行修改补充。接下来先完成这部分工作吧。</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;我在2015年开通了自己的博客，博客通过hexo+github搭建，博客开通的虽早，但是写作确没有怎么坚持下来，2015年到现在零零散散的写了不到10篇，多数还是在15年趁着刚刚搭建完的热乎劲写成，实在汗颜。2019阴历新年马上就要到了，我决定制定一个cocoaThinki
+      
+    
+    </summary>
+    
+    
+  </entry>
   
   <entry>
     <title>iOS9 Search API NSUserActivity</title>
