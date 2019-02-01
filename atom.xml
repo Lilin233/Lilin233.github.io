@@ -5,9 +5,9 @@
   <subtitle>好奇 专注 保持进步</subtitle>
   <link href="/atom.xml" rel="self"/>
   
-  <link href="http:/"/>
+  <link href="https://www.cocoathinking.com/"/>
   <updated>2015-09-25T03:49:18.000Z</updated>
-  <id>http:/</id>
+  <id>https://www.cocoathinking.com/</id>
   
   <author>
     <name>刘渣渣</name>
@@ -18,8 +18,8 @@
   
   <entry>
     <title>iOS9 Search API NSUserActivity</title>
-    <link href="http:/2015/09/25/NSUserActivity/"/>
-    <id>http:/2015/09/25/NSUserActivity/</id>
+    <link href="https://www.cocoathinking.com/2015/09/25/NSUserActivity/"/>
+    <id>https://www.cocoathinking.com/2015/09/25/NSUserActivity/</id>
     <published>2015-09-25T03:33:47.000Z</published>
     <updated>2015-09-25T03:49:18.000Z</updated>
     
@@ -32,21 +32,21 @@
     
     </summary>
     
-      <category term="iOS" scheme="http:/categories/iOS/"/>
+      <category term="iOS" scheme="https://www.cocoathinking.com/categories/iOS/"/>
     
     
-      <category term="iOS9" scheme="http:/tags/iOS9/"/>
+      <category term="iOS9" scheme="https://www.cocoathinking.com/tags/iOS9/"/>
     
-      <category term="Search API" scheme="http:/tags/Search-API/"/>
+      <category term="Search API" scheme="https://www.cocoathinking.com/tags/Search-API/"/>
     
-      <category term="NSUserActivity" scheme="http:/tags/NSUserActivity/"/>
+      <category term="NSUserActivity" scheme="https://www.cocoathinking.com/tags/NSUserActivity/"/>
     
   </entry>
   
   <entry>
     <title>NSArray和NSMutableArray</title>
-    <link href="http:/2015/08/26/%E6%95%B0%E7%BB%84/"/>
-    <id>http:/2015/08/26/数组/</id>
+    <link href="https://www.cocoathinking.com/2015/08/26/%E6%95%B0%E7%BB%84/"/>
+    <id>https://www.cocoathinking.com/2015/08/26/数组/</id>
     <published>2015-08-26T14:09:39.000Z</published>
     <updated>2015-08-26T14:11:25.000Z</updated>
     
@@ -66,8 +66,8 @@
   
   <entry>
     <title>iOS常用设计模式</title>
-    <link href="http:/2015/08/12/iOS%E5%B8%B8%E7%94%A8%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/"/>
-    <id>http:/2015/08/12/iOS常用设计模式/</id>
+    <link href="https://www.cocoathinking.com/2015/08/12/iOS%E5%B8%B8%E7%94%A8%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/"/>
+    <id>https://www.cocoathinking.com/2015/08/12/iOS常用设计模式/</id>
     <published>2015-08-12T09:04:17.000Z</published>
     <updated>2015-08-12T09:36:42.000Z</updated>
     
