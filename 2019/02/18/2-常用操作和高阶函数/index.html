@@ -96,18 +96,18 @@
 
 
 
-  <meta name="description" content="RAC现在分了两部分，ReactiveCocoaObjc和ReactiveCocoaSwift,本文介绍的均是 ReactiveCocoaObjc 2.5.0 版本的内容. RAC的核心是信号源（RACStream），在RAC中，信号源代表随着时间而改变的流值，订阅者通过订阅信号来获取这些值，RACStream是一个抽象类，我们用到的最多的是它的之类 RACSignal和RACSequence，">
+  <meta name="description" content="RAC现在分了两部分，ReactiveCocoaObjc和ReactiveCocoaSwift,本文介绍的均是 ReactiveCocoaObjc 2.5.0 版本的内容. RAC的核心是信号源（RACStream），在RAC中，信号源代表随着时间而改变的流值，订阅者通过订阅信号来获取这些值，RACStream是一个抽象类，我们用到的最多的是它的之类 RACSignal和RACSequence，以">
 <meta name="keywords" content="iOS">
 <meta property="og:type" content="article">
-<meta property="og:title" content="2.常用操作和高阶函数">
+<meta property="og:title" content="Reactivecocoa全解析 2.常用操作和高阶函数">
 <meta property="og:url" content="https://www.cocoathinking.com/2019/02/18/2-常用操作和高阶函数/index.html">
 <meta property="og:site_name" content="刘渣渣的Blog">
-<meta property="og:description" content="RAC现在分了两部分，ReactiveCocoaObjc和ReactiveCocoaSwift,本文介绍的均是 ReactiveCocoaObjc 2.5.0 版本的内容. RAC的核心是信号源（RACStream），在RAC中，信号源代表随着时间而改变的流值，订阅者通过订阅信号来获取这些值，RACStream是一个抽象类，我们用到的最多的是它的之类 RACSignal和RACSequence，">
+<meta property="og:description" content="RAC现在分了两部分，ReactiveCocoaObjc和ReactiveCocoaSwift,本文介绍的均是 ReactiveCocoaObjc 2.5.0 版本的内容. RAC的核心是信号源（RACStream），在RAC中，信号源代表随着时间而改变的流值，订阅者通过订阅信号来获取这些值，RACStream是一个抽象类，我们用到的最多的是它的之类 RACSignal和RACSequence，以">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-02-18T07:13:59.733Z">
+<meta property="og:updated_time" content="2019-02-19T08:39:50.670Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="2.常用操作和高阶函数">
-<meta name="twitter:description" content="RAC现在分了两部分，ReactiveCocoaObjc和ReactiveCocoaSwift,本文介绍的均是 ReactiveCocoaObjc 2.5.0 版本的内容. RAC的核心是信号源（RACStream），在RAC中，信号源代表随着时间而改变的流值，订阅者通过订阅信号来获取这些值，RACStream是一个抽象类，我们用到的最多的是它的之类 RACSignal和RACSequence，">
+<meta name="twitter:title" content="Reactivecocoa全解析 2.常用操作和高阶函数">
+<meta name="twitter:description" content="RAC现在分了两部分，ReactiveCocoaObjc和ReactiveCocoaSwift,本文介绍的均是 ReactiveCocoaObjc 2.5.0 版本的内容. RAC的核心是信号源（RACStream），在RAC中，信号源代表随着时间而改变的流值，订阅者通过订阅信号来获取这些值，RACStream是一个抽象类，我们用到的最多的是它的之类 RACSignal和RACSequence，以">
 
 
 
@@ -126,7 +126,7 @@
   };
 </script>
 
-  <title>2.常用操作和高阶函数 | 刘渣渣的Blog</title>
+  <title>Reactivecocoa全解析 2.常用操作和高阶函数 | 刘渣渣的Blog</title>
   
 
 
@@ -400,7 +400,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">2.常用操作和高阶函数
+          <h1 class="post-title" itemprop="name headline">Reactivecocoa全解析 2.常用操作和高阶函数
 
               
             
@@ -426,12 +426,24 @@
                 
               
 
-              <time title="Created: 2019-02-18 15:13:48 / Modified: 15:13:59" itemprop="dateCreated datePublished" datetime="2019-02-18T15:13:48+08:00">2019-02-18</time>
+              <time title="Created: 2019-02-18 15:13:48" itemprop="dateCreated datePublished" datetime="2019-02-18T15:13:48+08:00">2019-02-18</time>
             
 
             
               
 
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2019-02-19 16:39:50" itemprop="dateModified" datetime="2019-02-19T16:39:50+08:00">2019-02-19</time>
               
             
           </span>
@@ -478,114 +490,32 @@
 
       
         <p>RAC现在分了两部分，ReactiveCocoaObjc和ReactiveCocoaSwift,本文介绍的均是 ReactiveCocoaObjc 2.5.0 版本的内容.</p>
-<p>RAC的核心是信号源（RACStream），在RAC中，信号源代表随着时间而改变的流值，订阅者通过订阅信号来获取这些值，RACStream是一个抽象类，我们用到的最多的是它的之类 RACSignal和RACSequence，</p>
-<p>介绍RAC的操作之前先介绍以下链式操作</p>
+<p>RAC的核心是信号源（RACStream），在RAC中，信号源代表随着时间而改变的流值，订阅者通过订阅信号来获取这些值，RACStream是一个抽象类，我们用到的最多的是它的之类 RACSignal和RACSequence，<br><em>以下代码和示例使用的ReactiveCocoa 2.5版本</em><br>介绍RAC的操作之前先介绍以下链式操作</p>
 <p>链式操作：</p>
 <p>用过Masonry的同学应该对链式操作不陌生</p>
-<p>[self.label mas_makeConstraints:^(MASConstraintMaker *make) {</p>
-<p>make.top.left.mas_equalTo(0);</p>
-<p>make.centerY.mas_equalTo(self.view);</p>
-<p>make.width.height.mas_greaterThanOrEqualTo(0);</p>
-<p>}];</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">[self.label mas_makeConstraints:^(MASConstraintMaker *make) &#123;</span><br><span class="line"></span><br><span class="line">make.top.left.mas_equalTo(0);</span><br><span class="line"></span><br><span class="line">make.centerY.mas_equalTo(self.view);</span><br><span class="line"></span><br><span class="line">make.width.height.mas_greaterThanOrEqualTo(0);</span><br><span class="line"></span><br><span class="line">&#125;];</span><br></pre></td></tr></table></figure>
 <p>这里的make.top.left.mas_equalTo(0); 就是一个链式操作，执行一个方法后的返回结果接着执行下一个方法，前边我们已经讲到RAC使用的是FPR编程思想，所以在RAC中你同样可以使用链式操作</p>
-<p>我们修改一下上边的例子：</p>
-<p>[[RACObserve(self, username)</p>
-<p>filter:^(NSString *newName) {</p>
-<p>return [newName hasPrefix:@”j”];</p>
-<p>}]</p>
-<p>subscribeNext:^(NSString *newName) {</p>
-<p>NSLog(@”%@”, newName);</p>
-<p>}];</p>
+<p>我们修改一下上边的例子：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">[[RACObserve(self, username)</span><br><span class="line"></span><br><span class="line">filter:^(NSString *newName) &#123;</span><br><span class="line"></span><br><span class="line">return [newName hasPrefix:@&quot;j&quot;];</span><br><span class="line"></span><br><span class="line">&#125;]</span><br><span class="line"></span><br><span class="line">subscribeNext:^(NSString *newName) &#123;</span><br><span class="line"></span><br><span class="line">NSLog(@&quot;%@&quot;, newName);</span><br><span class="line"></span><br><span class="line">&#125;];</span><br></pre></td></tr></table></figure></p>
 <p>订阅：subscribeNext</p>
-<p>// When self.username changes, logs the new name to the console.</p>
-<p>//</p>
-<p>// RACObserve(self, username) creates a new RACSignal that sends the current</p>
-<p>// value of self.username, then the new value whenever it changes.</p>
-<p>// -subscribeNext: will execute the block whenever the signal sends a value.</p>
-<p>[RACObserve(self, username) subscribeNext:^(NSString *newName) {</p>
-<p>NSLog(@”%@”, newName);</p>
-<p>}];</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">// When self.username changes, logs the new name to the console.</span><br><span class="line"></span><br><span class="line">//</span><br><span class="line"></span><br><span class="line">// RACObserve(self, username) creates a new RACSignal that sends the current</span><br><span class="line"></span><br><span class="line">// value of self.username, then the new value whenever it changes.</span><br><span class="line"></span><br><span class="line">// -subscribeNext: will execute the block whenever the signal sends a value.</span><br><span class="line"></span><br><span class="line">[RACObserve(self, username) subscribeNext:^(NSString *newName) &#123;</span><br><span class="line"></span><br><span class="line">NSLog(@&quot;%@&quot;, newName);</span><br><span class="line"></span><br><span class="line">&#125;];</span><br></pre></td></tr></table></figure>
 <p>当username内容发生变化，就会打印出一个新的值。</p>
 <p>RACObserve(TARGET, KEYPATH) 是RAC提供的一个宏，他可以创建一个新的signal，这里，我们通过subscribeNext方法对 signal进行订阅，当username内容发生变化时，就会在block中获取username的新值并进行打印</p>
 <p>bind 对信号进行绑定，返回一个新的信号，它会订阅原信号的值，在bindingBlock中对原信号的值进行转换。</p>
-<p>RACSignal <em>orignSignal = [RACSignal createSignal:^RACDisposable </em>(id<racsubscriber> subscriber) { </racsubscriber></p>
-<p>[subscriber sendNext:@1];</p>
-<p>[subscriber sendCompleted];</p>
-<p>return [RACDisposable disposableWithBlock:^{</p>
-<p>NSLog(@”orign signal dispose”);</p>
-<p>}];</p>
-<p>}];</p>
-<p>RACSignal *newSignal = [orignSignal bind:^RACStreamBindBlock{</p>
-<p>return ^(NSNumber <em>value, BOOL </em>stop){</p>
-<p>return [RACSignal createSignal:^RACDisposable *(id<racsubscriber> subscriber) { </racsubscriber></p>
-<p>[subscriber sendNext:@(value.integerValue * 2)];</p>
-<p>[subscriber sendCompleted];</p>
-<p>return [RACDisposable disposableWithBlock:^{</p>
-<p>NSLog(@”bind dispose”);</p>
-<p>}];</p>
-<p>}];</p>
-<p>};</p>
-<p>}];</p>
-<p>[newSignal subscribeNext:^(id x) {</p>
-<p>NSLog(@”newSignal value = %@”, x);</p>
-<p>}];</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line">RACSignal *orignSignal = [RACSignal createSignal:^RACDisposable *(id&lt;RACSubscriber&gt; subscriber) &#123; </span><br><span class="line"></span><br><span class="line">[subscriber sendNext:@1];</span><br><span class="line"></span><br><span class="line">[subscriber sendCompleted];</span><br><span class="line"></span><br><span class="line">return [RACDisposable disposableWithBlock:^&#123;</span><br><span class="line"></span><br><span class="line">NSLog(@&quot;orign signal dispose&quot;);</span><br><span class="line"></span><br><span class="line">&#125;];</span><br><span class="line"></span><br><span class="line">&#125;];</span><br><span class="line"></span><br><span class="line">RACSignal *newSignal = [orignSignal bind:^RACStreamBindBlock&#123;</span><br><span class="line"></span><br><span class="line">return ^(NSNumber *value, BOOL *stop)&#123;</span><br><span class="line"></span><br><span class="line">return [RACSignal createSignal:^RACDisposable *(id&lt;RACSubscriber&gt; subscriber) &#123; </span><br><span class="line"></span><br><span class="line">[subscriber sendNext:@(value.integerValue * 2)];</span><br><span class="line"></span><br><span class="line">[subscriber sendCompleted];</span><br><span class="line"></span><br><span class="line">return [RACDisposable disposableWithBlock:^&#123;</span><br><span class="line"></span><br><span class="line">NSLog(@&quot;bind dispose&quot;);</span><br><span class="line"></span><br><span class="line">&#125;];</span><br><span class="line"></span><br><span class="line">&#125;];</span><br><span class="line"></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">&#125;];</span><br><span class="line"></span><br><span class="line">[newSignal subscribeNext:^(id x) &#123;</span><br><span class="line"></span><br><span class="line">NSLog(@&quot;newSignal value = %@&quot;, x);</span><br><span class="line"></span><br><span class="line">&#125;];</span><br></pre></td></tr></table></figure>
 <p>map:要完成对orign signal值得转换，使用map 和flattenMap是更简单的选择，这两个方法其实也是对bind方法的封装</p>
-<p>RACSignal <em>orignSignal = [RACSignal createSignal:^RACDisposable </em>(id<racsubscriber> subscriber) { </racsubscriber></p>
-<p>[subscriber sendNext:@1];</p>
-<p>[subscriber sendCompleted];</p>
-<p>return [RACDisposable disposableWithBlock:^{</p>
-<p>NSLog(@”orign signal dispose”);</p>
-<p>}];</p>
-<p>}];</p>
-<p>[[orignSignal map:^id(NSNumber *value) {</p>
-<p>return @(value.integerValue * 2);</p>
-<p>}]subscribeNext:^(id x) {</p>
-<p>NSLog(@”new value is %@”, x);</p>
-<p>}];</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">RACSignal *orignSignal = [RACSignal createSignal:^RACDisposable *(id&lt;RACSubscriber&gt; subscriber) &#123; </span><br><span class="line"></span><br><span class="line">[subscriber sendNext:@1];</span><br><span class="line"></span><br><span class="line">[subscriber sendCompleted];</span><br><span class="line"></span><br><span class="line">return [RACDisposable disposableWithBlock:^&#123;</span><br><span class="line"></span><br><span class="line">NSLog(@&quot;orign signal dispose&quot;);</span><br><span class="line"></span><br><span class="line">&#125;];</span><br><span class="line"></span><br><span class="line">&#125;];</span><br><span class="line"></span><br><span class="line">[[orignSignal map:^id(NSNumber *value) &#123;</span><br><span class="line"></span><br><span class="line">return @(value.integerValue * 2);</span><br><span class="line"></span><br><span class="line">&#125;]subscribeNext:^(id x) &#123;</span><br><span class="line"></span><br><span class="line">NSLog(@&quot;new value is %@&quot;, x);</span><br><span class="line"></span><br><span class="line">&#125;];</span><br></pre></td></tr></table></figure>
 <p>flattenMap 返回的是一个新的signal</p>
-<p>RACSignal <em>newSignal2 = [orignSignal flattenMap:^RACStream </em>(NSNumber * value) {</p>
-<p>return [RACSignal createSignal:^RACDisposable *(id<racsubscriber> subscriber) { </racsubscriber></p>
-<p>[subscriber sendNext:@(value.integerValue * 2)];</p>
-<p>return nil;</p>
-<p>}];</p>
-<p>}];</p>
-<p>[newSignal2 subscribeNext:^(id x) {</p>
-<p>NSLog(@”new value2 is %@”, x);</p>
-<p>}];</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">RACSignal *newSignal2 = [orignSignal flattenMap:^RACStream *(NSNumber * value) &#123;</span><br><span class="line"></span><br><span class="line">return [RACSignal createSignal:^RACDisposable *(id&lt;RACSubscriber&gt; subscriber) &#123; </span><br><span class="line"></span><br><span class="line">[subscriber sendNext:@(value.integerValue * 2)];</span><br><span class="line"></span><br><span class="line">return nil;</span><br><span class="line"></span><br><span class="line">&#125;];</span><br><span class="line"></span><br><span class="line">&#125;];</span><br><span class="line"></span><br><span class="line">[newSignal2 subscribeNext:^(id x) &#123;</span><br><span class="line"></span><br><span class="line">NSLog(@&quot;new value2 is %@&quot;, x);</span><br><span class="line"></span><br><span class="line">&#125;];</span><br></pre></td></tr></table></figure>
 <p>filter:对seguence遍历后进行过滤，将不符合条件的数据进行过滤掉，返回一个新的sequence</p>
 <p>nameArray.rac_sequence是将array转换为sequence，sequence代表了一个不可变的序列，它可以被订阅者订阅，而且还可以跟signal很方便的进行转换</p>
-<p>NSArray *nameArray = @[@”tom”, @”jerry”, @”tomas”, @”link”];</p>
-<p>NSArray <em>resultArray = [nameArray.rac_sequence filter:^BOOL(NSString </em>name) {</p>
-<p>return name.length &gt; 3;</p>
-<p>}].array;</p>
-<p>NSLog(@”%@”, resultArray);</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">NSArray *nameArray = @[@&quot;tom&quot;, @&quot;jerry&quot;, @&quot;tomas&quot;, @&quot;link&quot;];</span><br><span class="line"></span><br><span class="line">NSArray *resultArray = [nameArray.rac_sequence filter:^BOOL(NSString *name) &#123;</span><br><span class="line"></span><br><span class="line">return name.length &gt; 3;</span><br><span class="line"></span><br><span class="line">&#125;].array;</span><br><span class="line"></span><br><span class="line">NSLog(@&quot;%@&quot;, resultArray);</span><br></pre></td></tr></table></figure>
 <p>combineLatest 使用一个signal数组，当数组中的任意一个signal值发生变化时，就在block中对所有signal最后一个值进行处理，最后返回一个新的signal。</p>
-<p>self.validLoginSignal = [[RACSignal combineLatest:@[RACObserve(self, username), RACObserve(self, password)] reduce:^(NSString <em>username, NSString </em>password){</p>
-<p>return @(username.isExist &amp;&amp; password.isExist);</p>
-<p>}] distinctUntilChanged];</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">self.validLoginSignal = [[RACSignal combineLatest:@[RACObserve(self, username), RACObserve(self, password)] reduce:^(NSString *username, NSString *password)&#123;</span><br><span class="line"></span><br><span class="line">return @(username.isExist &amp;&amp; password.isExist);</span><br><span class="line"></span><br><span class="line">&#125;] distinctUntilChanged];</span><br></pre></td></tr></table></figure>
 <p>zip 对多个信号的值进行压缩后创建一个RACTuples， zip将对每一个signal的值以配对的形式进行合并，比如signalA发送1和3，signal发送了2，那么合并后的Tuples包含了signal的1和signal的2。这里是zip和combineLatest最大的区别，在这里使用combineLatest会得到3和2，因为会重复利用signalB的旧值</p>
-<p>RACSignal <em>signalA = [RACSignal createSignal:^RACDisposable </em>(id<racsubscriber> subscriber) { </racsubscriber></p>
-<p>[subscriber sendNext:@1];</p>
-<p>[subscriber sendNext:@3];</p>
-<p>[subscriber sendCompleted];</p>
-<p>return nil;</p>
-<p>}];</p>
-<p>RACSignal <em>signalB = [RACSignal createSignal:^RACDisposable </em>(id<racsubscriber> subscriber) { </racsubscriber></p>
-<p>[subscriber sendNext:@2];</p>
-<p>[subscriber sendCompleted];</p>
-<p>return nil;</p>
-<p>}];</p>
-<p>[[RACSignal zip:@[signalA, signalB]] subscribeNext:^(id x) {</p>
-<p>NSLog(@”zip %@”, x); //==&gt;1，2</p>
-<p>}];</p>
-<p>[[RACSignal combineLatest:@[signalA, signalB]] subscribeNext:^(id x) {</p>
-<p>NSLog(@”combineLatest: %@”, x); //==&gt;3，2</p>
-<p>}];</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">RACSignal *signalA = [RACSignal createSignal:^RACDisposable *(id&lt;RACSubscriber&gt; subscriber) &#123; </span><br><span class="line"></span><br><span class="line">[subscriber sendNext:@1];</span><br><span class="line"></span><br><span class="line">[subscriber sendNext:@3];</span><br><span class="line"></span><br><span class="line">[subscriber sendCompleted];</span><br><span class="line"></span><br><span class="line">return nil;</span><br><span class="line"></span><br><span class="line">&#125;];</span><br><span class="line"></span><br><span class="line">RACSignal *signalB = [RACSignal createSignal:^RACDisposable *(id&lt;RACSubscriber&gt; subscriber) &#123; </span><br><span class="line"></span><br><span class="line">[subscriber sendNext:@2];</span><br><span class="line"></span><br><span class="line">[subscriber sendCompleted];</span><br><span class="line"></span><br><span class="line">return nil;</span><br><span class="line"></span><br><span class="line">&#125;];</span><br><span class="line"></span><br><span class="line">[[RACSignal zip:@[signalA, signalB]] subscribeNext:^(id x) &#123;</span><br><span class="line"></span><br><span class="line">NSLog(@&quot;zip %@&quot;, x); //==&gt;1，2</span><br><span class="line"></span><br><span class="line">&#125;];</span><br><span class="line"></span><br><span class="line">[[RACSignal combineLatest:@[signalA, signalB]] subscribeNext:^(id x) &#123;</span><br><span class="line"></span><br><span class="line">NSLog(@&quot;combineLatest: %@&quot;, x); //==&gt;3，2</span><br><span class="line"></span><br><span class="line">&#125;];</span><br></pre></td></tr></table></figure>
 <p>merge</p>
 <p>对多个signal进行合并，会监听到任意一个signal值得变化，并返回这个signal最新的值，当所有的signal发送complete时候会发送complate，当任意一个signal发送error立刻就发送error</p>
-<p>[[RACSignal merge:@[signalA, signalB]] subscribeNext:^(id x) {</p>
-<p>NSLog(@”x = %@”, x);</p>
-<p>}];</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[[RACSignal merge:@[signalA, signalB]] subscribeNext:^(id x) &#123;</span><br><span class="line"></span><br><span class="line">NSLog(@&quot;x = %@&quot;, x);</span><br><span class="line"></span><br><span class="line">&#125;];</span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -616,8 +546,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/02/18/1-FRP编程思想/" rel="next" title="1.FRP编程思想">
-                <i class="fa fa-chevron-left"></i> 1.FRP编程思想
+              <a href="/2019/02/18/1-FRP编程思想/" rel="next" title="Reactivecocoa全解析 1.FRP编程思想">
+                <i class="fa fa-chevron-left"></i> Reactivecocoa全解析 1.FRP编程思想
               </a>
             
           </div>

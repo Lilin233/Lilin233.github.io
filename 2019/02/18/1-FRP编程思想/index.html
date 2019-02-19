@@ -96,18 +96,18 @@
 
 
 
-  <meta name="description" content="ReactiveCocoa是我在开发工作中重度使用的一个开源框架，当你使用MVVM设计模式的时候，它几乎是你最好的选择，当然你也可以使用其他的一些方式来完成数据绑定，KVO，delegate或者是block，但是RAC为你提供了更优雅更安全的绑定方式，我们可以使用RAC在View和ViewModel中充当binder的角色来实现数据的同步，也可以把RAC放在ViewModel层，使用signal来">
+  <meta name="description" content="ReactiveCocoa全解析 1.FRP编程思想 ReactiveCocoa是我在开发工作中重度使用的一个开源框架，当你使用MVVM设计模式的时候，它几乎是你最好的选择，当然你也可以使用其他的一些方式来完成数据绑定，KVO，delegate或者是block，但是RAC为你提供了更优雅更安全的绑定方式，我们可以使用RAC在View和ViewModel中充当binder的角色来实现数据的同步，也可">
 <meta name="keywords" content="iOS">
 <meta property="og:type" content="article">
-<meta property="og:title" content="1.FRP编程思想">
+<meta property="og:title" content="Reactivecocoa全解析 1.FRP编程思想">
 <meta property="og:url" content="https://www.cocoathinking.com/2019/02/18/1-FRP编程思想/index.html">
 <meta property="og:site_name" content="刘渣渣的Blog">
-<meta property="og:description" content="ReactiveCocoa是我在开发工作中重度使用的一个开源框架，当你使用MVVM设计模式的时候，它几乎是你最好的选择，当然你也可以使用其他的一些方式来完成数据绑定，KVO，delegate或者是block，但是RAC为你提供了更优雅更安全的绑定方式，我们可以使用RAC在View和ViewModel中充当binder的角色来实现数据的同步，也可以把RAC放在ViewModel层，使用signal来">
+<meta property="og:description" content="ReactiveCocoa全解析 1.FRP编程思想 ReactiveCocoa是我在开发工作中重度使用的一个开源框架，当你使用MVVM设计模式的时候，它几乎是你最好的选择，当然你也可以使用其他的一些方式来完成数据绑定，KVO，delegate或者是block，但是RAC为你提供了更优雅更安全的绑定方式，我们可以使用RAC在View和ViewModel中充当binder的角色来实现数据的同步，也可">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-02-18T07:10:34.739Z">
+<meta property="og:updated_time" content="2019-02-19T08:40:21.789Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="1.FRP编程思想">
-<meta name="twitter:description" content="ReactiveCocoa是我在开发工作中重度使用的一个开源框架，当你使用MVVM设计模式的时候，它几乎是你最好的选择，当然你也可以使用其他的一些方式来完成数据绑定，KVO，delegate或者是block，但是RAC为你提供了更优雅更安全的绑定方式，我们可以使用RAC在View和ViewModel中充当binder的角色来实现数据的同步，也可以把RAC放在ViewModel层，使用signal来">
+<meta name="twitter:title" content="Reactivecocoa全解析 1.FRP编程思想">
+<meta name="twitter:description" content="ReactiveCocoa全解析 1.FRP编程思想 ReactiveCocoa是我在开发工作中重度使用的一个开源框架，当你使用MVVM设计模式的时候，它几乎是你最好的选择，当然你也可以使用其他的一些方式来完成数据绑定，KVO，delegate或者是block，但是RAC为你提供了更优雅更安全的绑定方式，我们可以使用RAC在View和ViewModel中充当binder的角色来实现数据的同步，也可">
 
 
 
@@ -126,7 +126,7 @@
   };
 </script>
 
-  <title>1.FRP编程思想 | 刘渣渣的Blog</title>
+  <title>Reactivecocoa全解析 1.FRP编程思想 | 刘渣渣的Blog</title>
   
 
 
@@ -400,7 +400,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">1.FRP编程思想
+          <h1 class="post-title" itemprop="name headline">Reactivecocoa全解析 1.FRP编程思想
 
               
             
@@ -426,12 +426,24 @@
                 
               
 
-              <time title="Created: 2019-02-18 15:09:30 / Modified: 15:10:34" itemprop="dateCreated datePublished" datetime="2019-02-18T15:09:30+08:00">2019-02-18</time>
+              <time title="Created: 2019-02-18 15:09:30" itemprop="dateCreated datePublished" datetime="2019-02-18T15:09:30+08:00">2019-02-18</time>
             
 
             
               
 
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2019-02-19 16:40:21" itemprop="dateModified" datetime="2019-02-19T16:40:21+08:00">2019-02-19</time>
               
             
           </span>
@@ -477,7 +489,8 @@
       
 
       
-        <p>ReactiveCocoa是我在开发工作中重度使用的一个开源框架，当你使用MVVM设计模式的时候，它几乎是你最好的选择，当然你也可以使用其他的一些方式来完成数据绑定，KVO，delegate或者是block，但是RAC为你提供了更优雅更安全的绑定方式，我们可以使用RAC在View和ViewModel中充当binder的角色来实现数据的同步，也可以把RAC放在ViewModel层，使用signal来异步获取数据，比如网络请求，访问数据库等。 </p>
+        <p>ReactiveCocoa全解析 1.FRP编程思想</p>
+<p>ReactiveCocoa是我在开发工作中重度使用的一个开源框架，当你使用MVVM设计模式的时候，它几乎是你最好的选择，当然你也可以使用其他的一些方式来完成数据绑定，KVO，delegate或者是block，但是RAC为你提供了更优雅更安全的绑定方式，我们可以使用RAC在View和ViewModel中充当binder的角色来实现数据的同步，也可以把RAC放在ViewModel层，使用signal来异步获取数据，比如网络请求，访问数据库等。 </p>
 <p>因为RAC是一个使用起来并不那么容易的开源框架，所以接下来我会分几个部分来介绍它： </p>
 <ol>
 <li>FRP 的思想概要  （oop和fp）</li>
@@ -488,18 +501,21 @@
 <li>实战分享</li>
 </ol>
 <p>ReactiveCocoa是Gitbub开源的一个函数响应式编程框架，它是iOS上的函数响应式编程（FRP）体现，要理解RAC，首先我们就要理解函数响应式编程（FRP），刚开始接触FRP可能有一些困扰，因为它和我们以往的编程方式区别很大，接下来我们回顾一下现在常用的编程方式：面向对象编程（OOP）和面向协议编程（POP）</p>
-<p>从我们刚开始学习编程，接触到的最多就是面向对象编程（OOP），OOP的优点很多，继承，抽象，多态，可重用性，可维护性等等，我们从很早就知道了万物皆可盘（误 ，应该是万物皆对象的编程思想，当然有人也有一些质疑，比如结构体和对象的关系等，抛开这些争论，面向对象仍然是一种灵活的，易于维护的编程方式。</p>
-<p>//苹果公司声明：从核心上说，Swift是面向协议的</p>
-<p>面向协议编程（POP）是我在Swift编程中使用的编程方式。我在15-16年中使用Swift来完成编程工作，现在因为一些原因我又回到了Objective-C阵营，但我仍无比的怀念Swift，其中一个重要原因，就是Swift对面向协议编程的友好支持，POP拥有OOP的大部分特点，他们之间最大的区别是：类只能继承一个类（这里只讨论iOS开发语言，像一些编程语言比如C++的确拥有多继承，但是多继承在工作中仍然不是一个很好的特性），而类可以实现多个协议。我们可以举一个例子，如果现在要创建漫威英雄的类，我们要怎么创建？</p>
+<p>###面向对象编程（OOP<br>从我们刚开始学习编程，接触到的最多就是面向对象编程（OOP），OOP的优点很多，继承，抽象，多态，可重用性，可维护性等等，我们从很早就知道了万物皆可盘（误 ，应该是万物皆对象的编程思想，当然有人也有一些质疑，比如结构体和对象的关系等，抛开这些争论，面向对象仍然是一种灵活的，易于维护的编程方式。</p>
+<p>###面向协议编程（POP）<br>面向协议编程（POP）是我在使用Swift时用到的编程方式。我在15-16年中使用Swift来完成编程工作，现在因为一些原因我又回到了Objective-C阵营，但我仍无比的怀念Swift，其中一个重要原因，就是Swift对面向协议编程的友好支持。</p>
+<blockquote>
+<p>苹果公司声明：从核心上说，Swift是面向协议的</p>
+</blockquote>
+<p>POP拥有OOP的大部分特点，他们之间最大的区别是：类只能继承一个类（这里只讨论iOS开发语言，像一些编程语言比如C++的确拥有多继承，但是多继承在工作中仍然不是一个很好的特性），而类可以实现多个协议。我们可以举一个例子，如果现在要创建漫威英雄的类，我们要怎么创建？</p>
 <p>创建一个父类,拥有fly，land方法， SuperHero：fly（），land()</p>
 <p>子类Super Man：</p>
 <p>子类Iron Man：</p>
 <p>子类Spider Man：</p>
-<p>我们都知道小蜘蛛是没有飞行能力的，所以在这里将fly和land方法放在父类中并不可行，我们必须在超人和钢铁侠中单独加入fly和land，但是拥有飞行能力的超级英雄并不少见，我们接下来不得不为猎鹰，幻世，绯红女巫他们挨个加上。所以面向对象在这里并不是很可靠，换个思路，我们用POP试一下</p>
-<p>创建一个fly协议，拥有fly和land两个方法，因为飞行和降落都是对应的，所以这里没有什么问题，接下来我们只要将拥有飞行能力的超级英雄实现fly协议就好。</p>
-<p>编程思想并没有孰优孰劣，我们这里只是做一个简单介绍，接下介绍一下今天的重点，面向函数响应式编程（FRP）</p>
-<p>FRP全称Function Reactive Programing，它包含了两个部分，函数式编程 Function  Programing（FP）和响应式编程  Reactive Programing（RP）,</p>
-<p>响应式编程 </p>
+<p>我们都知道小蜘蛛是没有飞行能力的，所以在这里将fly和land方法放在父类中并不可行，我们必须在父类删除fly和land，在超人和钢铁侠中单独加入fly和land，但是拥有飞行能力的超级英雄并不少见，我们接下来不得不为猎鹰，幻世，绯红女巫他们挨个加上。所以面向对象在这里并不是很可靠，换个思路，这里我们用POP试一下</p>
+<p>创建一个fly协议，拥有fly和land两个方法，因为飞行和降落都是对应的，所以这里没有什么问题，接下来我们只要将拥有飞行能力的超级英雄实现fly协议，这样使用这个fly协议的超级英雄就拥有了飞行能力，当然我们也可以建立更多的协议，来为超级英雄增加更多的能力。</p>
+<p>编程思想并没有孰优孰劣，我们这里只是做一个简单介绍，接下介绍一下今天的重点，函数响应式编程（FRP）。</p>
+<p>###函数响应式编程（FRP）<br>FRP全称Function Reactive Programing，它包含了两个部分，函数式编程 Function  Programing（FP）和响应式编程  Reactive Programing（RP）,</p>
+<p>####响应式编程 </p>
 <p>我们先来看一段代码，</p>
 <p>int a  = 3;</p>
 <p>int b  = 5;</p>
@@ -507,27 +523,10 @@
 <p>a = 8;</p>
 <p>NSLog(@“c = %d”, c); //8</p>
 <p>这是我们熟悉的编程方式，首先为a和b进行赋值，然后将a + b的指赋给c，打印c的结果为8，接下来修改a和b的值后重新打印c，此时c的值仍然是8。因为代码中的  a + b只是一个瞬时的操作，并不是一段关系的描述。</p>
-<p>响应式编程是一种面向数据流和变化传播的编程范式，这意味着可以再编程语言中很方便的表达静态和动态的数据流，而相关的计算模型会自动将变化的值通过数据流进行传播，所以在响应式编程中，上述粒子中的c 会跟根据a、b值得变化而发生变化</p>
-<p>在app的登录界面中，我们常常需要通过判断用户名和密码是否填写合法后来设置登陆按钮的可点击状态，这里我们可以对userNameTextField和passwordTextField进行监听，然后将监听的结果合并后进行合法性判断，最后将处理的结果绑定到登陆按钮上，这在RAC中是一个最常用的写法，当userNameTextField和passwordTextField发生变化时，登陆按钮的状态会自动发生变化</p>
-<p>RAC(self.viewModel, username) = self.usernameTexField.rac_textSignal;</p>
-<p>RAC(self.viewModel, password) = self.passwordTextField.rac_textSignal;</p>
-<p>self.validLoginSignal = [[RACSignal combineLatest:@[RACObserve(self, username), </p>
-<p>RACObserve(self, password)] reduce:^(NSString <em>username, NSString </em>password){<br>return @(username.isExist &amp;&amp; password.isExist);<br>}] distinctUntilChanged];</p>
-<p>RAC(self.loginButton, enabled) = self.viewModel.validLoginSignal;</p>
-<p>另外一个典型的例子，在iOS开发中我们用Autolayout设置约束来描述视图之间的位置关系，当某一个约束发生改变后，其他的约束就会响应发生变化，这里也是响应式编程的体现。</p>
-<p>函数式编程</p>
-<p>函数式编程将计算机运算视为函数运算，并且避免使用程序状态和易变对象，在函数式编程中函数可以像其他数据类型一样，处于平等的地位，可以作为参数传递到另一个函数中，可以赋值给其他的变量，也可以做为别的函数的返回值。</p>
-<p>我们可以使用RAC提供的一系列高阶函数来实现函数式编程，比如map，falltenMap,,filter,reduce,merge,combinte等等，在接下来的文章中我会介绍一下RAC为我们提供的常用的高阶函数。</p>
-<p>说了这么多，那么使用FRP到底有什么好处呢，我觉得使用FRP可以为我们解决以下几个问题：</p>
-<p>过多的状态值 </p>
-<p>vc中的冗余代码</p>
-<p>消息传递机制</p>
-<p>Event之间的组合，交互</p>
-<p>多请求的处理</p>
-<p>代码简化：1.事件的处理 2.高阶函数的使用 （多请求的处理）</p>
-<p>channel</p>
-<p>racschedule</p>
-<p>到这里大家应该已经对FRP编程思想有一些认识，接下来我会介绍以下RAC为我们提供的高阶函数，已经如何如果使用它们来解决开发工作中可能遇到的一些问题。</p>
+<p>而响应式编程是一种面向数据流和变化传播的编程范式，这意味着可以再编程语言中很方便的表达静态和动态的数据流，而相关的计算模型会自动将变化的值通过数据流进行传播，所以在响应式编程中，上述例子中的c 会跟根据a、b值得变化而发生变化</p>
+<p>在app的登录界面中，我们常常需要通过判断用户名和密码是否填写合法后来设置登陆按钮的可点击状态，这里我们可以对userNameTextField和passwordTextField进行监听，然后将监听的结果合并后进行合法性判断，最后将处理的结果绑定到登陆按钮上，这在RAC中是一个最常用的写法，当userNameTextField和passwordTextField发生变化时，登陆按钮的状态会相应的发生变化。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">RAC(self.viewModel, username) = self.usernameTexField.rac_textSignal;</span><br><span class="line"></span><br><span class="line">RAC(self.viewModel, password) = self.passwordTextField.rac_textSignal;</span><br><span class="line"></span><br><span class="line">self.validLoginSignal = [[RACSignal combineLatest:@[RACObserve(self, username), </span><br><span class="line"></span><br><span class="line">RACObserve(self, password)] reduce:^(NSString *username, NSString *password)&#123;</span><br><span class="line">return @(username.isExist &amp;&amp; password.isExist);</span><br><span class="line">&#125;] distinctUntilChanged];</span><br><span class="line"></span><br><span class="line">RAC(self.loginButton, enabled) = self.viewModel.validLoginSignal;</span><br></pre></td></tr></table></figure>
+<p>​<br>​<br>​ 另外一个典型的例子，在iOS开发中我们用Autolayout设置约束来描述视图之间的位置关系，当某一个约束发生改变后，其他的约束就会响应发生变化，这里也是响应式编程的体现。<br>​<br>​ ####函数式编程<br>​<br>​ 函数式编程将计算机运算视为函数运算，并且避免使用程序状态和易变对象，在函数式编程中函数可以像其他数据类型一样，处于平等的地位，可以作为参数传递到另一个函数中，可以赋值给其他的变量，也可以做为别的函数的返回值。<br>​<br>​ 我们可以使用RAC提供的一系列高阶函数来实现函数式编程，比如map，falltenMap,,filter,reduce,merge,combinte等等，在接下来的文章中我会介绍一下RAC为我们提供的常用的高阶函数。<br>​<br>​<br>​ 到这里大家应该已经对FRP编程思想有一些认识，接下来我会介绍以下RAC为我们提供的高阶函数，已经如何如果使用它们来解决开发工作中可能遇到的一些问题。<br>​<br>​<br>​<br>​<br>​<br>​<br>​<br>​<br>​<br>​ 说了这么多，那么使用FRP到底有什么好处呢，我觉得使用FRP可以为我们解决以下几个问题：<br>​<br>​ 过多的状态值<br>​<br>​ vc中的冗余代码<br>​<br>​ 消息传递机制<br>​<br>​ Event之间的组合，交互<br>​<br>​ 多请求的处理<br>​ </p>
 
       
     </div>
@@ -568,8 +567,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2019/02/18/2-常用操作和高阶函数/" rel="prev" title="2.常用操作和高阶函数">
-                2.常用操作和高阶函数 <i class="fa fa-chevron-right"></i>
+              <a href="/2019/02/18/2-常用操作和高阶函数/" rel="prev" title="Reactivecocoa全解析 2.常用操作和高阶函数">
+                Reactivecocoa全解析 2.常用操作和高阶函数 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
