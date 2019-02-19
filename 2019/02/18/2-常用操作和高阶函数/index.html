@@ -104,7 +104,7 @@
 <meta property="og:site_name" content="刘渣渣的Blog">
 <meta property="og:description" content="RAC现在分了两部分，ReactiveCocoaObjc和ReactiveCocoaSwift,本文介绍的均是 ReactiveCocoaObjc 2.5.0 版本的内容. RAC的核心是信号源（RACStream），在RAC中，信号源代表随着时间而改变的流值，订阅者通过订阅信号来获取这些值，RACStream是一个抽象类，我们用到的最多的是它的之类 RACSignal和RACSequence，以">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-02-19T08:39:50.670Z">
+<meta property="og:updated_time" content="2019-02-19T08:42:31.151Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Reactivecocoa全解析 2.常用操作和高阶函数">
 <meta name="twitter:description" content="RAC现在分了两部分，ReactiveCocoaObjc和ReactiveCocoaSwift,本文介绍的均是 ReactiveCocoaObjc 2.5.0 版本的内容. RAC的核心是信号源（RACStream），在RAC中，信号源代表随着时间而改变的流值，订阅者通过订阅信号来获取这些值，RACStream是一个抽象类，我们用到的最多的是它的之类 RACSignal和RACSequence，以">
@@ -443,7 +443,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2019-02-19 16:39:50" itemprop="dateModified" datetime="2019-02-19T16:39:50+08:00">2019-02-19</time>
+                <time title="Modified: 2019-02-19 16:42:31" itemprop="dateModified" datetime="2019-02-19T16:42:31+08:00">2019-02-19</time>
               
             
           </span>
@@ -490,7 +490,9 @@
 
       
         <p>RAC现在分了两部分，ReactiveCocoaObjc和ReactiveCocoaSwift,本文介绍的均是 ReactiveCocoaObjc 2.5.0 版本的内容.</p>
-<p>RAC的核心是信号源（RACStream），在RAC中，信号源代表随着时间而改变的流值，订阅者通过订阅信号来获取这些值，RACStream是一个抽象类，我们用到的最多的是它的之类 RACSignal和RACSequence，<br><em>以下代码和示例使用的ReactiveCocoa 2.5版本</em><br>介绍RAC的操作之前先介绍以下链式操作</p>
+<p>RAC的核心是信号源（RACStream），在RAC中，信号源代表随着时间而改变的流值，订阅者通过订阅信号来获取这些值，RACStream是一个抽象类，我们用到的最多的是它的之类 RACSignal和RACSequence，<br><em>以下代码和示例使用的ReactiveCocoa 2.5版本</em></p>
+<a id="more"></a>
+<p>介绍RAC的操作之前先介绍以下链式操作</p>
 <p>链式操作：</p>
 <p>用过Masonry的同学应该对链式操作不陌生</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">[self.label mas_makeConstraints:^(MASConstraintMaker *make) &#123;</span><br><span class="line"></span><br><span class="line">make.top.left.mas_equalTo(0);</span><br><span class="line"></span><br><span class="line">make.centerY.mas_equalTo(self.view);</span><br><span class="line"></span><br><span class="line">make.width.height.mas_greaterThanOrEqualTo(0);</span><br><span class="line"></span><br><span class="line">&#125;];</span><br></pre></td></tr></table></figure>
