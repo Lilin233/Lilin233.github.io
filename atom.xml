@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://www.cocoathinking.com/"/>
-  <updated>2019-04-22T09:02:13.970Z</updated>
+  <updated>2019-04-23T06:50:46.863Z</updated>
   <id>https://www.cocoathinking.com/</id>
   
   <author>
@@ -15,6 +15,27 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>栈的最佳实践 - 打造一个逆波兰计算器</title>
+    <link href="https://www.cocoathinking.com/2019/04/23/%E6%A0%88%E7%9A%84%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5-%E6%89%93%E9%80%A0%E4%B8%80%E4%B8%AA%E9%80%86%E6%B3%A2%E5%85%B0%E8%AE%A1%E7%AE%97%E5%99%A8/"/>
+    <id>https://www.cocoathinking.com/2019/04/23/栈的最佳实践-打造一个逆波兰计算器/</id>
+    <published>2019-04-23T06:44:03.000Z</published>
+    <updated>2019-04-23T06:50:46.863Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="栈的介绍"><a href="#栈的介绍" class="headerlink" title="栈的介绍"></a>栈的介绍</h3><p>栈的应用很多，可以检查程序中的符号是否都成对的出现，每一个右括号都应该有一个对应的左括号，可以用栈来实现进制的转换，当然还有今天的主题，利用栈来实现一个逆波兰计算器</p><h3 id="逆波兰表达式"><a href="#逆波兰表达式" class="headerlink" title="逆波兰表达式"></a>逆波兰表达式</h3><p>逆波兰表达式（Reverse Polish Notation 简称RPN），又称为后缀表达式，作为比较，我们常用的中序表达式表示方法是操作符位于操作数中间，比如 1 + 2，这里操作符+位于操作数1和2中间，而后缀表达式的表示方法是操作符位于两个操作数中间，比如1 2 +，这里的操作符+位于两个操作数1 2后边。总结来说RPN的特点就是表达式中各个运算是按运算符出现的顺序进行的，故无须使用括号来指示运算顺序</p><p>下边给出一些表达式的两种表示方法<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">1 + 2            1 2 +</span><br><span class="line">1 + 2 * 3        1 2 3 * +</span><br><span class="line">1 - ( 3 + 1 )    1 3 1 + -</span><br></pre></td></tr></table></figure></p><p>从上面的例子可以看出：</p><ol><li>在两种表示中，运算对象出现的顺序相同；</li><li>在后缀表示中，运算符按实际计算顺序从左到右排列，且每一运算符总是跟在其运算对象之后。</li></ol><p><strong>逆波兰表达示的优势就在于我们只需要两种简单的操作入栈和出栈，就可以实现简单表达式的运算</strong></p><h3 id="中序表达式转换为逆波兰表达式"><a href="#中序表达式转换为逆波兰表达式" class="headerlink" title="中序表达式转换为逆波兰表达式"></a>中序表达式转换为逆波兰表达式</h3><p>首先需要分配两个栈，一个是用来存储临时操作符的栈S1，还有一个用来存储逆波兰表达式的栈S2</p><p>从中序表达式的左端取字符，逐一执行以下操作</p><ol><li>若取出的字符是操作数，直接将操作数送入S2栈</li><li>若取出的字符是运算符，则将该运算符与S1栈栈顶元素比较，如果该运算符优先级大于S1栈栈顶运算符优先级，则将该运算符进S1栈，否则，将S1栈的栈顶运算符弹出，送入S2栈中，直至S1栈栈顶运算符低于（不包括等于）该运算符优先级，则将该运算符送入S1栈。</li><li>若取出的字符是“（”，则直接送入S1栈栈顶。</li><li>若取出的字符是“）”，则将距离S1栈栈顶最近的“（”之间的运算符，逐个出栈，依次送入S2栈，此时抛弃“（”。</li><li>重复上面的1~4步，直至处理完所有的输入字符</li><li>若取出的字符是“#”，则将S1栈内所有运算符（不包括“#”），逐个出栈，依次送入S2栈。<br>完成以上步骤，S2栈便为逆波兰式输出结果。不过不要忘记S2栈要做一下逆序处理</li></ol><h3 id="计算的逻辑"><a href="#计算的逻辑" class="headerlink" title="计算的逻辑"></a>计算的逻辑</h3>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h3 id=&quot;栈的介绍&quot;&gt;&lt;a href=&quot;#栈的介绍&quot; class=&quot;headerlink&quot; title=&quot;栈的介绍&quot;&gt;&lt;/a&gt;栈的介绍&lt;/h3&gt;&lt;p&gt;栈的应用很多，可以检查程序中的符号是否都成对的出现，每一个右括号都应该有一个对应的左括号，可以用栈来实现进制的转换，当然还有
+      
+    
+    </summary>
+    
+    
+  </entry>
   
   <entry>
     <title>iOS中Active与JS的交互</title>
